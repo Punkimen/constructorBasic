@@ -25,7 +25,9 @@ var editor = grapesjs.init({
 		embedAsBase64: true,
 		assets: images,
 	},
-	selectorManager: {componentFirst: true},
+	selectorManager: {
+		componentFirst: true,
+	},
 	styleManager: {
 		sectors: [
 			{
@@ -36,13 +38,25 @@ var editor = grapesjs.init({
 						type: "radio",
 						default: "none",
 						options: [
-							{value: "none", className: "fa fa-times"},
-							{value: "left", className: "fa fa-align-left"},
-							{value: "right", className: "fa fa-align-right"},
+							{
+								value: "none",
+								className: "fa fa-times",
+							},
+							{
+								value: "left",
+								className: "fa fa-align-left",
+							},
+							{
+								value: "right",
+								className: "fa fa-align-right",
+							},
 						],
 					},
 					"display",
-					{extend: "position", type: "select"},
+					{
+						extend: "position",
+						type: "select",
+					},
 					"top",
 					"right",
 					"left",
@@ -82,9 +96,21 @@ var editor = grapesjs.init({
 					{
 						extend: "text-align",
 						options: [
-							{id: "left", label: "Left", className: "fa fa-align-left"},
-							{id: "center", label: "Center", className: "fa fa-align-center"},
-							{id: "right", label: "Right", className: "fa fa-align-right"},
+							{
+								id: "left",
+								label: "Left",
+								className: "fa fa-align-left",
+							},
+							{
+								id: "center",
+								label: "Center",
+								className: "fa fa-align-center",
+							},
+							{
+								id: "right",
+								label: "Right",
+								className: "fa fa-align-right",
+							},
 							{
 								id: "justify",
 								label: "Justify",
@@ -97,7 +123,11 @@ var editor = grapesjs.init({
 						type: "radio",
 						default: "none",
 						options: [
-							{id: "none", label: "None", className: "fa fa-times"},
+							{
+								id: "none",
+								label: "None",
+								className: "fa fa-times",
+							},
 							{
 								id: "underline",
 								label: "underline",
@@ -139,8 +169,14 @@ var editor = grapesjs.init({
 						type: "select",
 						defaults: "block",
 						list: [
-							{value: "block", name: "Disable"},
-							{value: "flex", name: "Enable"},
+							{
+								value: "block",
+								name: "Disable",
+							},
+							{
+								value: "flex",
+								name: "Enable",
+							},
 						],
 					},
 					{
@@ -334,7 +370,9 @@ var editor = grapesjs.init({
 		"grapesjs-preset-webpage",
 	],
 	pluginsOpts: {
-		"gjs-blocks-basic": {flexGrid: true},
+		"gjs-blocks-basic": {
+			flexGrid: true,
+		},
 		"grapesjs-tui-image-editor": {
 			script: [
 				// 'https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.6.7/fabric.min.js',
@@ -348,7 +386,9 @@ var editor = grapesjs.init({
 			],
 		},
 		"grapesjs-tabs": {
-			tabsBlock: {category: "Extra"},
+			tabsBlock: {
+				category: "Extra",
+			},
 		},
 		"grapesjs-typed": {
 			block: {
@@ -389,14 +429,14 @@ var modal = editor.Modal;
 var cmdm = editor.Commands;
 
 // Update canvas-clear command
-cmdm.add("canvas-clear", function () {
-	if (confirm("Are you sure to clean the canvas?")) {
-		editor.runCommand("core:canvas-clear");
-		setTimeout(function () {
-			localStorage.clear();
-		}, 0);
-	}
-});
+// cmdm.add('canvas-clear', function () {
+//     if (confirm('Are you sure to clean the canvas?')) {
+//         editor.runCommand('core:canvas-clear')
+//         setTimeout(function () {
+//             localStorage.clear()
+//         }, 0)
+//     }
+// });
 
 // Add info command
 var mdlClass = "gjs-mdl-dialog-sm";
@@ -479,12 +519,12 @@ for (var i = 0; i < titles.length; i++) {
 }
 
 // Store and load events
-editor.on("storage:load", function (e) {
-	console.log("Loaded ", e);
-});
-editor.on("storage:store", function (e) {
-	console.log("Stored ", e);
-});
+// editor.on('storage:load', function (e) {
+//     console.log('Loaded ', e)
+// });
+// editor.on('storage:store', function (e) {
+//     console.log('Stored ', e)
+// });
 
 // Do stuff on load
 editor.on("load", function () {
@@ -548,7 +588,7 @@ editor.on("load", function () {
 	a.async = 1;
 	a.src = g;
 	m.parentNode.insertBefore(a, m);
-})(window, document, "script", "//www.google-analytics.com/analytics.js", "ga");
+})(window, document, "script", "", "ga");
 
 ga("create", "UA-74284223-1", "auto");
 ga("send", "pageview");
