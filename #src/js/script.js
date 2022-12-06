@@ -21,6 +21,16 @@ var editor = grapesjs.init({
 	container: "#gjs",
 	fromElement: true,
 	showOffsets: true,
+	storageManager: true,
+	noticeOnUnload: false,
+	allowScripts: 1,
+	storageManager: {
+		id: "gjs-", // Prefix identifier that will be used on parameters
+		type: "local", // Type of the storage
+		autosave: false, // Store data automatically
+		autoload: true, // Autoload stored data on init
+		stepsBeforeSave: 1, // If autosave enabled, indicates how many changes are necessary
+	},
 	assetManager: {
 		embedAsBase64: true,
 		assets: images,
@@ -423,7 +433,27 @@ editor.I18n.addMessages({
 		},
 	},
 });
+editor.Panels.addButton("options", {
+	id: "save-db",
+	className: "fa fa-floppy-o",
+	command: (editor, sender) => {
+		sender && sender.set("active"); // turn off the button
+		editor.store();
+	},
+	attributes: {
+		title: "Save DB",
+	},
+});
 
+// save additional data to grapesjs storage
+editor.on("storage:start:store", (objectToStore) => {
+	// check if we use mjml plugin
+	if (editor.getConfig().plugins.includes("grapesjs-mjml")) {
+		// save converted html from mjml
+		// see LocalStorage on what is saved.
+		objectToStore.mjml = editor.runCommand("mjml-get-code").html;
+	}
+});
 var pn = editor.Panels;
 var modal = editor.Modal;
 var cmdm = editor.Commands;
